@@ -1,6 +1,6 @@
 """Generate Markov text from text files."""
 
-from random import choice
+import random
 
 
 def open_and_read_file(file_path):
@@ -56,9 +56,15 @@ def make_chains(text_string):
 def make_text(chains):
     """Return text from chains."""
 
-    words = []
+    rand_key = random.choice(list(chains.keys()))
+    # print(rand_key)
+    words = [rand_key[0], rand_key[1]]
 
-    # your code goes here
+    while rand_key in chains:
+        link = random.choice(chains[rand_key])
+        words.append(link)
+        rand_key = (rand_key[1], link)
+     
 
     return ' '.join(words)
 
